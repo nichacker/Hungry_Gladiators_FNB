@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mamu's Kitchen - Gourmet Orders</title>
+    <title>HUNGRY GLADIATORS KITCHEN - Gourmet Orders</title>
     <style>
         * {
             margin: 0;
@@ -394,7 +394,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="restaurant-name">Mamu's Kitchen</h1>
+            <h1 class="restaurant-name">HUNGRY GLADIATORS KITCHEN</h1>
             <div class="decorative-line"></div>
             <p class="tagline">Authentic Flavors • Crafted with Passion • Delivered Fresh</p>
         </div>
@@ -461,26 +461,12 @@
                         <div class="menu-item-content">
                             <div class="menu-item-info">
                                 <div class="menu-item-name">Aromatic Biryani</div>
-                                <div class="menu-item-price">RM 6.00</div>
+                                <div class="menu-item-price">RM 11.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="biryani-minus">−</button>
                                 <span class="quantity-display" id="biryani-qty">0</span>
                                 <button type="button" class="quantity-btn" id="biryani-plus">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="menu-item-content">
-                            <div class="menu-item-info">
-                                <div class="menu-item-name">Creamy Mushroom Soup</div>
-                                <div class="menu-item-price">RM 3.50</div>
-                            </div>
-                            <div class="quantity-control">
-                                <button type="button" class="quantity-btn" id="mushroom_soup-minus">−</button>
-                                <span class="quantity-display" id="mushroom_soup-qty">0</span>
-                                <button type="button" class="quantity-btn" id="mushroom_soup-plus">+</button>
                             </div>
                         </div>
                     </div>
@@ -537,8 +523,8 @@
                         <div class="menu-item-content">
                             <div class="menu-item-info">
                                 <div class="menu-item-name">The Comfort Set</div>
-                                <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Aromatic Biryani with Creamy Mushroom Soup</div>
-                                <div class="menu-item-price">RM 9.50</div>
+                                <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Aromatic Biryani and Iced Tea</div>
+                                <div class="menu-item-price">RM 13.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="combo2-minus">−</button>
@@ -552,7 +538,7 @@
                         <div class="menu-item-content">
                             <div class="menu-item-info">
                                 <div class="menu-item-name">The Complete Experience</div>
-                                <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Fresh Lemonade, Aromatic Biryani & Creamy Mushroom Soup</div>
+                                <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Fresh Lemonade & Aromatic Biryani</div>
                                 <div class="menu-item-price">RM 11.50</div>
                             </div>
                             <div class="quantity-control">
@@ -588,6 +574,10 @@
                         <span>Subtotal:</span>
                         <span id="subtotal">RM 0.00</span>
                     </div>
+                    <div class="summary-row" id="discountRow" style="display:none;">
+                        <span>5% Discount:</span>
+                        <span id="discount">-RM 0.00</span>
+                    </div>
                     <div class="summary-row">
                         <span>Delivery Service:</span>
                         <span id="deliveryFee">RM 0.00</span>
@@ -604,7 +594,7 @@
 
                 <div class="message success-message" id="successMessage">
                     <h3>🍽️ Order Confirmed</h3>
-                    <p>Thank you for choosing Mamu's Kitchen. We will contact you shortly to arrange delivery.</p>
+                    <p>Thank you for choosing HUNGRY GLADIATORS KITCHEN. We will contact you shortly to arrange delivery.</p>
                 </div>
 
                 <div class="message error-message" id="errorMessage">
@@ -624,12 +614,11 @@
         const menuItems = {
             'mamu': { name: 'Signature Homemade Mamu', price: 0.00 },
             'lemonade': { name: 'Fresh Squeezed Lemonade', price: 2.00 },
-            'biryani': { name: 'Aromatic Biryani', price: 6.00 },
-            'mushroom_soup': { name: 'Creamy Mushroom Soup', price: 3.50 },
+            'biryani': { name: 'Aromatic Biryani', price: 11.00 },
             'sate_sprite': { name: 'Grilled Satay with Sprite', price: 8.00 },
             'laksa_tea': { name: 'Traditional Laksa with Iced Tea', price: 9.00 },
             'combo1': { name: 'The Classic Duo', price: 8.00 },
-            'combo2': { name: 'The Comfort Set', price: 9.50 },
+            'combo2': { name: 'The Comfort Set', price: 13.00 },
             'combo3': { name: 'The Complete Experience', price: 11.50 }
         };
 
@@ -638,7 +627,6 @@
             'mamu': 0,
             'lemonade': 0,
             'biryani': 0,
-            'mushroom_soup': 0,
             'sate_sprite': 0,
             'laksa_tea': 0,
             'combo1': 0,
@@ -682,9 +670,20 @@
                 orderItemsDiv.innerHTML = '<div class="empty-cart">No selections made</div>';
             }
 
+            // Calculate discount
+            let discount = 0;
+            if (subtotal > 45) {
+                discount = subtotal * 0.05;
+                document.getElementById('discountRow').style.display = '';
+                document.getElementById('discount').textContent = `-RM ${discount.toFixed(2)}`;
+            } else {
+                document.getElementById('discountRow').style.display = 'none';
+                document.getElementById('discount').textContent = '-RM 0.00';
+            }
+
             // Calculate totals
             const deliveryFee = document.getElementById('needShipping').checked ? 2.00 : 0.00;
-            const beforeGST = subtotal + deliveryFee;
+            const beforeGST = subtotal - discount + deliveryFee;
             const gst = beforeGST * 0.06;
             const total = beforeGST + gst;
 
@@ -762,9 +761,6 @@
             document.getElementById('biryani-plus').addEventListener('click', () => updateQuantity('biryani', 1));
             document.getElementById('biryani-minus').addEventListener('click', () => updateQuantity('biryani', -1));
             
-            document.getElementById('mushroom_soup-plus').addEventListener('click', () => updateQuantity('mushroom_soup', 1));
-            document.getElementById('mushroom_soup-minus').addEventListener('click', () => updateQuantity('mushroom_soup', -1));
-            
             document.getElementById('sate_sprite-plus').addEventListener('click', () => updateQuantity('sate_sprite', 1));
             document.getElementById('sate_sprite-minus').addEventListener('click', () => updateQuantity('sate_sprite', -1));
             
@@ -782,6 +778,21 @@
 
             // Delivery checkbox
             document.getElementById('needShipping').addEventListener('change', updateTotal);
+
+            // Auto-check delivery if address is filled
+            const addressInput = document.getElementById('address');
+            const deliveryCheckbox = document.getElementById('needShipping');
+            addressInput.addEventListener('input', function() {
+                const val = addressInput.value.trim().toLowerCase();
+                if (val.includes('selangor') || val.includes('kuala lumpur') || val.includes('kl')) {
+                    deliveryCheckbox.checked = true;
+                    deliveryCheckbox.disabled = true;
+                } else {
+                    deliveryCheckbox.checked = false;
+                    deliveryCheckbox.disabled = false;
+                }
+                updateTotal();
+            });
         }
 
         // Initialize everything when page loads
@@ -818,9 +829,15 @@
                     }
                 });
 
+                // Calculate discount
+                let discount = 0;
+                if (subtotal > 45) {
+                    discount = subtotal * 0.05;
+                }
+
                 // Calculate final amounts
                 const deliveryFee = document.getElementById('needShipping').checked ? 2.00 : 0.00;
-                const beforeGST = subtotal + deliveryFee;
+                const beforeGST = subtotal - discount + deliveryFee;
                 const gst = beforeGST * 0.06;
                 const total = beforeGST + gst;
 
@@ -832,6 +849,7 @@
                     address: document.getElementById('address').value || 'Self Collection',
                     needShipping: document.getElementById('needShipping').checked ? 'Yes' : 'No',
                     subtotal: subtotal.toFixed(2),
+                    discount: discount.toFixed(2),
                     deliveryFee: deliveryFee.toFixed(2),
                     gst: gst.toFixed(2),
                     total: total.toFixed(2),
@@ -840,7 +858,6 @@
                     mamu_quantity: quantities['mamu'],
                     lemonade_quantity: quantities['lemonade'],
                     biryani_quantity: quantities['biryani'],
-                    mushroom_soup_quantity: quantities['mushroom_soup'],
                     sate_sprite_quantity: quantities['sate_sprite'],
                     laksa_tea_quantity: quantities['laksa_tea'],
                     combo1_quantity: quantities['combo1'],
