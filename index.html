@@ -432,22 +432,8 @@
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <div class="menu-item-info">
-                                <div class="menu-item-name">Signature Homemade Mamu</div>
-                                <div class="menu-item-price">Complimentary</div>
-                            </div>
-                            <div class="quantity-control">
-                                <button type="button" class="quantity-btn" id="mamu-minus">−</button>
-                                <span class="quantity-display" id="mamu-qty">0</span>
-                                <button type="button" class="quantity-btn" id="mamu-plus">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="menu-item-content">
-                            <div class="menu-item-info">
                                 <div class="menu-item-name">Fresh Squeezed Lemonade</div>
-                                <div class="menu-item-price">RM 2.00</div>
+                                <div class="menu-item-price">RM 4.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="lemonade-minus">−</button>
@@ -461,7 +447,7 @@
                         <div class="menu-item-content">
                             <div class="menu-item-info">
                                 <div class="menu-item-name">Aromatic Biryani</div>
-                                <div class="menu-item-price">RM 11.00</div>
+                                <div class="menu-item-price">RM 8.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="biryani-minus">−</button>
@@ -474,8 +460,8 @@
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <div class="menu-item-info">
-                                <div class="menu-item-name">Grilled Satay with Sprite</div>
-                                <div class="menu-item-price">RM 8.00</div>
+                                <div class="menu-item-name">Grilled Satay (10 STICK) with Sprite</div>
+                                <div class="menu-item-price">RM 17.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="sate_sprite-minus">−</button>
@@ -489,7 +475,7 @@
                         <div class="menu-item-content">
                             <div class="menu-item-info">
                                 <div class="menu-item-name">Traditional Laksa with Iced Tea</div>
-                                <div class="menu-item-price">RM 9.00</div>
+                                <div class="menu-item-price">RM 9.30</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="laksa_tea-minus">−</button>
@@ -509,7 +495,7 @@
                             <div class="menu-item-info">
                                 <div class="menu-item-name">The Classic Duo</div>
                                 <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Aromatic Biryani paired with Fresh Lemonade</div>
-                                <div class="menu-item-price">RM 8.00</div>
+                                <div class="menu-item-price">RM 12.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="combo1-minus">−</button>
@@ -524,27 +510,12 @@
                             <div class="menu-item-info">
                                 <div class="menu-item-name">The Comfort Set</div>
                                 <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Aromatic Biryani and Iced Tea</div>
-                                <div class="menu-item-price">RM 13.00</div>
+                                <div class="menu-item-price">RM 9.00</div>
                             </div>
                             <div class="quantity-control">
                                 <button type="button" class="quantity-btn" id="combo2-minus">−</button>
                                 <span class="quantity-display" id="combo2-qty">0</span>
                                 <button type="button" class="quantity-btn" id="combo2-plus">+</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="menu-item">
-                        <div class="menu-item-content">
-                            <div class="menu-item-info">
-                                <div class="menu-item-name">The Complete Experience</div>
-                                <div style="color: #999; font-size: 0.9em; margin: 5px 0;">Fresh Lemonade & Aromatic Biryani</div>
-                                <div class="menu-item-price">RM 11.50</div>
-                            </div>
-                            <div class="quantity-control">
-                                <button type="button" class="quantity-btn" id="combo3-minus">−</button>
-                                <span class="quantity-display" id="combo3-qty">0</span>
-                                <button type="button" class="quantity-btn" id="combo3-plus">+</button>
                             </div>
                         </div>
                     </div>
@@ -613,19 +584,17 @@
         
         // Menu items with prices
         const menuItems = {
-            'mamu': { name: 'Signature Homemade Mamu', price: 0.00 },
-            'lemonade': { name: 'Fresh Squeezed Lemonade', price: 2.00 },
-            'biryani': { name: 'Aromatic Biryani', price: 11.00 },
-            'sate_sprite': { name: 'Grilled Satay with Sprite', price: 8.00 },
-            'laksa_tea': { name: 'Traditional Laksa with Iced Tea', price: 9.00 },
-            'combo1': { name: 'The Classic Duo', price: 8.00 },
-            'combo2': { name: 'The Comfort Set', price: 13.00 },
+            'lemonade': { name: 'Fresh Squeezed Lemonade', price: 4.00 },
+            'biryani': { name: 'Aromatic Biryani', price: 8.00 },
+            'sate_sprite': { name: 'Grilled Satay (10 STICK) with Sprite', price: 17.00 },
+            'laksa_tea': { name: 'Traditional Laksa with Iced Tea', price: 9.30 },
+            'combo1': { name: 'The Classic Duo', price: 12.00 },
+            'combo2': { name: 'The Comfort Set', price: 9.00 },
             'combo3': { name: 'The Complete Experience', price: 11.50 }
         };
 
         // Order quantities
         const quantities = {
-            'mamu': 0,
             'lemonade': 0,
             'biryani': 0,
             'sate_sprite': 0,
@@ -748,9 +717,6 @@
         // Setup all button event listeners
         function setupButtons() {
             // Individual button setup for each item
-            document.getElementById('mamu-plus').addEventListener('click', () => updateQuantity('mamu', 1));
-            document.getElementById('mamu-minus').addEventListener('click', () => updateQuantity('mamu', -1));
-            
             document.getElementById('lemonade-plus').addEventListener('click', () => updateQuantity('lemonade', 1));
             document.getElementById('lemonade-minus').addEventListener('click', () => updateQuantity('lemonade', -1));
             
@@ -851,7 +817,6 @@
                     total: total.toFixed(2),
                     orderItems: orderItemsList.join('; '),
                     // Individual quantities
-                    mamu_quantity: quantities['mamu'],
                     lemonade_quantity: quantities['lemonade'],
                     biryani_quantity: quantities['biryani'],
                     sate_sprite_quantity: quantities['sate_sprite'],
