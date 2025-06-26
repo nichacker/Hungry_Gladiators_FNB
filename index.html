@@ -429,6 +429,8 @@
                         <div class="category-title">À La Carte</div>
                     </div>
                     
+                    <!-- Signature Homemade Mamu removed as requested -->
+
                     <div class="menu-item">
                         <div class="menu-item-content">
                             <div class="menu-item-info">
@@ -589,8 +591,7 @@
             'sate_sprite': { name: 'Grilled Satay (10 STICK) with Sprite', price: 17.00 },
             'laksa_tea': { name: 'Traditional Laksa with Iced Tea', price: 9.30 },
             'combo1': { name: 'The Classic Duo', price: 12.00 },
-            'combo2': { name: 'The Comfort Set', price: 9.00 },
-            'combo3': { name: 'The Complete Experience', price: 11.50 }
+            'combo2': { name: 'The Comfort Set', price: 9.00 }
         };
 
         // Order quantities
@@ -600,8 +601,7 @@
             'sate_sprite': 0,
             'laksa_tea': 0,
             'combo1': 0,
-            'combo2': 0,
-            'combo3': 0
+            'combo2': 0
         };
 
         // Update quantities and total
@@ -719,24 +719,16 @@
             // Individual button setup for each item
             document.getElementById('lemonade-plus').addEventListener('click', () => updateQuantity('lemonade', 1));
             document.getElementById('lemonade-minus').addEventListener('click', () => updateQuantity('lemonade', -1));
-            
             document.getElementById('biryani-plus').addEventListener('click', () => updateQuantity('biryani', 1));
             document.getElementById('biryani-minus').addEventListener('click', () => updateQuantity('biryani', -1));
-            
             document.getElementById('sate_sprite-plus').addEventListener('click', () => updateQuantity('sate_sprite', 1));
             document.getElementById('sate_sprite-minus').addEventListener('click', () => updateQuantity('sate_sprite', -1));
-            
             document.getElementById('laksa_tea-plus').addEventListener('click', () => updateQuantity('laksa_tea', 1));
             document.getElementById('laksa_tea-minus').addEventListener('click', () => updateQuantity('laksa_tea', -1));
-            
             document.getElementById('combo1-plus').addEventListener('click', () => updateQuantity('combo1', 1));
             document.getElementById('combo1-minus').addEventListener('click', () => updateQuantity('combo1', -1));
-            
             document.getElementById('combo2-plus').addEventListener('click', () => updateQuantity('combo2', 1));
             document.getElementById('combo2-minus').addEventListener('click', () => updateQuantity('combo2', -1));
-            
-            document.getElementById('combo3-plus').addEventListener('click', () => updateQuantity('combo3', 1));
-            document.getElementById('combo3-minus').addEventListener('click', () => updateQuantity('combo3', -1));
 
             // Delivery checkbox
             document.getElementById('needShipping').addEventListener('change', updateTotal);
@@ -822,8 +814,7 @@
                     sate_sprite_quantity: quantities['sate_sprite'],
                     laksa_tea_quantity: quantities['laksa_tea'],
                     combo1_quantity: quantities['combo1'],
-                    combo2_quantity: quantities['combo2'],
-                    combo3_quantity: quantities['combo3']
+                    combo2_quantity: quantities['combo2']
                 };
 
                 // Use AJAX method
