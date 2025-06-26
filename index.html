@@ -389,6 +389,78 @@
                 font-size: 2.5em;
             }
         }
+
+        .payment-option {
+            background: linear-gradient(135deg, #2d2d2d, #262626);
+            border: 2px solid #404040;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option:hover {
+            border-color: #d4af37;
+            transform: translateY(-2px);
+        }
+
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-option input[type="radio"]:checked + label {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .payment-option input[type="radio"]:checked ~ .payment-option {
+            border-color: #d4af37;
+            background: linear-gradient(135deg, #3a2f1a, #2a2520);
+        }
+
+        .payment-option label {
+            font-size: 1.1em;
+            color: #cccccc;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .card-type-option {
+            background: linear-gradient(135deg, #2d2d2d, #262626);
+            border: 2px solid #404040;
+            border-radius: 8px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .card-type-option:hover {
+            border-color: #d4af37;
+        }
+
+        .card-type-option input[type="radio"] {
+            display: none;
+        }
+
+        .card-type-option input[type="radio"]:checked + label {
+            color: #d4af37;
+            font-weight: 600;
+        }
+
+        .card-type-option label {
+            font-size: 0.9em;
+            color: #cccccc;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .payment-details {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid #444;
+        }
     </style>
 </head>
 <body>
@@ -417,6 +489,9 @@
                     <div class="form-group">
                         <label for="address">Delivery Address</label>
                         <textarea id="address" name="address" rows="3" placeholder="Please provide your complete address for delivery"></textarea>
+                        <small style="color: #d4af37; margin-top: 8px; display: block; font-style: italic;">
+                            💡 Tip: Enter "KL", "Selangor", or "Kuala Lumpur" to automatically enable delivery service
+                        </small>
                     </div>
                 </div>
 
@@ -534,6 +609,117 @@
                         <small style="color: #999; margin-top: 12px; display: block;">
                             • Uncheck for self-collection
                         </small>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="section">
+                    <h3 class="section-title">Payment Information</h3>
+                    
+                    <!-- Payment Method Selection -->
+                    <div class="form-group">
+                        <label>Payment Method *</label>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 10px;">
+                            <div class="payment-option">
+                                <input type="radio" id="paymentCard" name="paymentMethod" value="card" checked>
+                                <label for="paymentCard">Credit/Debit Card</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentQR" name="paymentMethod" value="qr">
+                                <label for="paymentQR">QR Payment</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentBank" name="paymentMethod" value="bank">
+                                <label for="paymentBank">Bank Transfer</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Card Details -->
+                    <div id="cardDetails" class="payment-details">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number *</label>
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardExpiry">Expiration Date *</label>
+                                <input type="text" id="cardExpiry" name="cardExpiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardCVV">Security Code (CVV) *</label>
+                                <input type="text" id="cardCVV" name="cardCVV" placeholder="XXX" maxlength="4">
+                            </div>
+                            <div class="form-group">
+                                <label>Card Type *</label>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-top: 10px;">
+                                    <div class="card-type-option">
+                                        <input type="radio" id="cardVisa" name="cardType" value="visa">
+                                        <label for="cardVisa">Visa</label>
+                                    </div>
+                                    <div class="card-type-option">
+                                        <input type="radio" id="cardMC" name="cardType" value="mastercard">
+                                        <label for="cardMC">MC</label>
+                                    </div>
+                                    <div class="card-type-option">
+                                        <input type="radio" id="cardAmex" name="cardType" value="amex">
+                                        <label for="cardAmex">Amex</label>
+                                    </div>
+                                    <div class="card-type-option">
+                                        <input type="radio" id="cardOther" name="cardType" value="other">
+                                        <label for="cardOther">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Payment Details -->
+                    <div id="qrDetails" class="payment-details" style="display: none;">
+                        <div class="qr-info">
+                            <p style="color: #d4af37; font-weight: 500; margin-bottom: 15px;">📱 Scan QR Code to Pay</p>
+                            <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 12px; padding: 30px; text-align: center;">
+                                <div style="width: 150px; height: 150px; background: #f5f5f5; margin: 0 auto 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">
+                                    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/8vyqi-fjk96.jpg" alt="Malaysia National QR" style="width: 140px; height: 140px; object-fit: contain; border-radius: 6px;" />
+                                </div>
+                                <p style="color: #cccccc; margin-bottom: 10px;">Supported: Touch 'n Go, Boost, GrabPay</p>
+                                <p style="color: #999; font-size: 0.9em;">Scan with your preferred e-wallet app</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Transfer Details -->
+                    <div id="bankDetails" class="payment-details" style="display: none;">
+                        <div class="bank-info">
+                            <p style="color: #d4af37; font-weight: 500; margin-bottom: 15px;">🏦 Bank Transfer Details</p>
+                            <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 12px; padding: 25px;">
+                                <div style="margin-bottom: 15px;">
+                                    <strong style="color: #d4af37;">Bank:</strong> <span style="color: #cccccc;">Maybank</span>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <strong style="color: #d4af37;">Account Name:</strong> <span style="color: #cccccc;">HUNGRY GLADIATORS KITCHEN</span>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <strong style="color: #d4af37;">Account Number:</strong> <span style="color: #cccccc;">1234 5678 9012 3456</span>
+                                </div>
+                                <div style="margin-bottom: 15px;">
+                                    <strong style="color: #d4af37;">Reference:</strong> <span style="color: #cccccc;">Your Order ID</span>
+                                </div>
+                                <small style="color: #999; display: block; margin-top: 15px;">
+                                    ⚠️ Please include your Order ID as payment reference
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-group" style="margin-top: 30px;">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the terms and conditions *</label>
+                        </div>
                     </div>
                 </div>
 
@@ -747,6 +933,70 @@
                 }
                 updateTotal();
             });
+
+            // Payment method switching
+            setupPaymentMethods();
+
+            // Card input formatting
+            setupCardInputs();
+        }
+
+        // Setup payment method switching
+        function setupPaymentMethods() {
+            const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+            const cardDetails = document.getElementById('cardDetails');
+            const qrDetails = document.getElementById('qrDetails');
+            const bankDetails = document.getElementById('bankDetails');
+
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    // Hide all payment details
+                    cardDetails.style.display = 'none';
+                    qrDetails.style.display = 'none';
+                    bankDetails.style.display = 'none';
+
+                    // Show selected payment details
+                    switch(this.value) {
+                        case 'card':
+                            cardDetails.style.display = 'block';
+                            break;
+                        case 'qr':
+                            qrDetails.style.display = 'block';
+                            break;
+                        case 'bank':
+                            bankDetails.style.display = 'block';
+                            break;
+                    }
+                });
+            });
+        }
+
+        // Setup card input formatting
+        function setupCardInputs() {
+            // Card number formatting
+            const cardNumber = document.getElementById('cardNumber');
+            cardNumber.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = formattedValue;
+            });
+
+            // Expiry date formatting
+            const cardExpiry = document.getElementById('cardExpiry');
+            cardExpiry.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+
+            // CVV formatting
+            const cardCVV = document.getElementById('cardCVV');
+            cardCVV.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+                e.target.value = value;
+            });
         }
 
         // Initialize everything when page loads
@@ -762,6 +1012,45 @@
                 if (!hasItems) {
                     alert('Please select at least one item to order!');
                     return;
+                }
+
+                // Validate payment information
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+                if (!paymentMethod) {
+                    alert('Please select a payment method!');
+                    return;
+                }
+
+                // Validate terms agreement
+                const agreeTerms = document.getElementById('agreeTerms');
+                if (!agreeTerms.checked) {
+                    alert('Please agree to the terms and conditions!');
+                    return;
+                }
+
+                // Validate card details if card payment is selected
+                if (paymentMethod.value === 'card') {
+                    const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                    const cardExpiry = document.getElementById('cardExpiry').value;
+                    const cardCVV = document.getElementById('cardCVV').value;
+                    const cardType = document.querySelector('input[name="cardType"]:checked');
+
+                    if (!cardNumber || cardNumber.length < 13) {
+                        alert('Please enter a valid card number!');
+                        return;
+                    }
+                    if (!cardExpiry || cardExpiry.length < 5) {
+                        alert('Please enter a valid expiration date!');
+                        return;
+                    }
+                    if (!cardCVV || cardCVV.length < 3) {
+                        alert('Please enter a valid CVV!');
+                        return;
+                    }
+                    if (!cardType) {
+                        alert('Please select a card type!');
+                        return;
+                    }
                 }
 
                 // Show loading state
@@ -795,6 +1084,20 @@
                 const gst = beforeGST * 0.06;
                 const total = beforeGST + gst;
 
+                // Get payment information
+                let paymentInfo = {
+                    method: paymentMethod.value,
+                    cardNumber: '',
+                    cardExpiry: '',
+                    cardType: ''
+                };
+
+                if (paymentMethod.value === 'card') {
+                    paymentInfo.cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+                    paymentInfo.cardExpiry = document.getElementById('cardExpiry').value;
+                    paymentInfo.cardType = document.querySelector('input[name="cardType"]:checked').value;
+                }
+
                 // Create order data object
                 const orderData = {
                     timestamp: new Date().toLocaleString('en-MY', {timeZone: 'Asia/Kuala_Lumpur'}),
@@ -808,6 +1111,10 @@
                     gst: gst.toFixed(2),
                     total: total.toFixed(2),
                     orderItems: orderItemsList.join('; '),
+                    paymentMethod: paymentInfo.method,
+                    cardNumber: paymentInfo.cardNumber,
+                    cardExpiry: paymentInfo.cardExpiry,
+                    cardType: paymentInfo.cardType,
                     // Individual quantities
                     lemonade_quantity: quantities['lemonade'],
                     biryani_quantity: quantities['biryani'],
