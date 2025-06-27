@@ -478,7 +478,7 @@
                     <h3 class="section-title">Guest Information</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="customerName">Full Name *</label>
+                            <label for="customerName">Company Name *</label>
                             <input type="text" id="customerName" name="customerName" required>
                         </div>
                         <div class="form-group">
@@ -501,7 +501,7 @@
                     
                     <!-- Individual Items -->
                     <div class="category-header">
-                        <div class="category-title">À La Carte</div>
+                        <div class="category-title">Main Course</div>
                     </div>
                     
                     <!-- Signature Homemade Mamu removed as requested -->
@@ -682,7 +682,7 @@
                             <p style="color: #d4af37; font-weight: 500; margin-bottom: 15px;">📱 Scan QR Code to Pay</p>
                             <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 12px; padding: 30px; text-align: center;">
                                 <div style="width: 150px; height: 150px; background: #f5f5f5; margin: 0 auto 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">
-                                    <img src="https://s11.aconvert.com/convert/p3r68-cdx67/8vyqi-fjk96.jpg" alt="Malaysia National QR" style="width: 140px; height: 140px; object-fit: contain; border-radius: 6px;" />
+                                    <img src="https://cdn.corenexis.com/i/mm/ju27/SizNgE.jpg?token=aedc24a92f16c90d81d8a5563dc65ff5" alt="Malaysia National QR" style="width: 140px; height: 140px; object-fit: contain; border-radius: 6px;" />
                                 </div>
                                 <p style="color: #cccccc; margin-bottom: 10px;">Supported: Touch 'n Go, Boost, GrabPay</p>
                                 <p style="color: #999; font-size: 0.9em;">Scan with your preferred e-wallet app</p>
@@ -991,11 +991,26 @@
                 e.target.value = value;
             });
 
-            // CVV formatting
+            // CVV formatting and dynamic length
             const cardCVV = document.getElementById('cardCVV');
+            const cardTypeInputs = document.querySelectorAll('input[name="cardType"]');
+            
             cardCVV.addEventListener('input', function(e) {
                 let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
                 e.target.value = value;
+            });
+            
+            // Update CVV field based on card type selection
+            cardTypeInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    if (this.value === 'amex') {
+                        cardCVV.maxLength = 4;
+                        cardCVV.placeholder = 'XXXX';
+                    } else {
+                        cardCVV.maxLength = 3;
+                        cardCVV.placeholder = 'XXX';
+                    }
+                });
             });
         }
 
@@ -1043,10 +1058,14 @@
                         alert('Please enter a valid expiration date!');
                         return;
                     }
-                    if (!cardCVV || cardCVV.length < 3) {
-                        alert('Please enter a valid CVV!');
+                    
+                    // Validate CVV based on card type
+                    const expectedCVVLength = cardType && cardType.value === 'amex' ? 4 : 3;
+                    if (!cardCVV || cardCVV.length !== expectedCVVLength) {
+                        alert(`Please enter a valid ${expectedCVVLength}-digit CVV!`);
                         return;
                     }
+                    
                     if (!cardType) {
                         alert('Please select a card type!');
                         return;
