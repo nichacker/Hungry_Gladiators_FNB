@@ -619,7 +619,7 @@
                     <!-- Payment Method Selection -->
                     <div class="form-group">
                         <label>Payment Method *</label>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-top: 10px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 15px; margin-top: 10px;">
                             <div class="payment-option">
                                 <input type="radio" id="paymentCard" name="paymentMethod" value="card" checked>
                                 <label for="paymentCard">Credit/Debit Card</label>
@@ -627,6 +627,14 @@
                             <div class="payment-option">
                                 <input type="radio" id="paymentQR" name="paymentMethod" value="qr">
                                 <label for="paymentQR">QR Payment</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentWeChat" name="paymentMethod" value="wechat">
+                                <label for="paymentWeChat">WeChat Pay</label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="paymentAlipay" name="paymentMethod" value="alipay">
+                                <label for="paymentAlipay">Alipay</label>
                             </div>
                             <div class="payment-option">
                                 <input type="radio" id="paymentBank" name="paymentMethod" value="bank">
@@ -682,9 +690,9 @@
                             <p style="color: #d4af37; font-weight: 500; margin-bottom: 15px;">📱 Scan QR Code to Pay</p>
                             <div style="background: #2a2a2a; border: 2px solid #d4af37; border-radius: 12px; padding: 30px; text-align: center;">
                                 <div style="width: 150px; height: 150px; background: #f5f5f5; margin: 0 auto 20px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #666;">
-                                    <img src="https://cdn.corenexis.com/i/mm/ju27/SizNgE.jpg?token=aedc24a92f16c90d81d8a5563dc65ff5" alt="Malaysia National QR" style="width: 140px; height: 140px; object-fit: contain; border-radius: 6px;" />
+                                    <img id="qrCodeImg" src="https://agricultural-jade-fwmz6sabv0.edgeone.app/WhatsApp%20%E5%9B%BE%E5%83%8F2025-06-26%E4%BA%8E09.19.46_f9cdf744.jpg" alt="TNG QR Code" style="width: 140px; height: 140px; object-fit: contain; border-radius: 6px;" />
                                 </div>
-                                <p style="color: #cccccc; margin-bottom: 10px;">Supported: Touch 'n Go, Boost, GrabPay</p>
+                                <p id="qrSupportedText" style="color: #cccccc; margin-bottom: 10px;">Supported: Touch 'n Go, Boost, GrabPay</p>
                                 <p style="color: #999; font-size: 0.9em;">Scan with your preferred e-wallet app</p>
                             </div>
                         </div>
@@ -961,7 +969,25 @@
                             cardDetails.style.display = 'block';
                             break;
                         case 'qr':
+                        case 'wechat':
+                        case 'alipay':
                             qrDetails.style.display = 'block';
+                            // Change QR code image and supported text based on payment method
+                            const qrImg = document.getElementById('qrCodeImg');
+                            const qrSupportedText = document.getElementById('qrSupportedText');
+                            if (this.value === 'qr') {
+                                qrImg.src = 'https://agricultural-jade-fwmz6sabv0.edgeone.app/WhatsApp%20%E5%9B%BE%E5%83%8F2025-06-26%E4%BA%8E09.19.46_f9cdf744.jpg';
+                                qrImg.alt = 'TNG QR Code';
+                                qrSupportedText.textContent = "Supported: Touch 'n Go, Boost, GrabPay";
+                            } else if (this.value === 'alipay') {
+                                qrImg.src = 'https://manual-white-xq72mcljb9.edgeone.app/WhatsApp%20%E5%9B%BE%E5%83%8F2025-06-30%E4%BA%8E06.52.47_e05c3a12.jpg';
+                                qrImg.alt = 'Alipay QR Code';
+                                qrSupportedText.textContent = 'Supported: Alipay';
+                            } else if (this.value === 'wechat') {
+                                qrImg.src = 'https://yucky-harlequin-yolkugcvt1.edgeone.app/WhatsApp%20%E5%9B%BE%E5%83%8F2025-06-30%E4%BA%8E06.52.48_e34c6b5e.jpg';
+                                qrImg.alt = 'WeChat Pay QR Code';
+                                qrSupportedText.textContent = 'Supported: WeChat Pay';
+                            }
                             break;
                         case 'bank':
                             bankDetails.style.display = 'block';
